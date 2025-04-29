@@ -20,6 +20,7 @@ pub extern "C" fn freopen(filename: Bytes, mode: Bytes, file: FILE) -> FILE
 /// ```c
 /// 	int fclose(FILE *stream);
 /// ```
+#borrow(stream)
 pub extern "C" fn fclose(stream : FILE) -> Int = "moonbit_fclose_ffi"
 
 // int remove(const char *filename)
@@ -82,6 +83,7 @@ pub extern "C" fn fsetpos(stream: FILE, pos: Int64) -> Int = "fsetpos"
 
 // 	size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 // 从给定流 stream 读取数据到 ptr 所指向的数组中。
+#borrow(ptr)
 pub extern "C" fn fread(
     ptr: Bytes, 
     size: Int, 
@@ -93,6 +95,7 @@ pub extern "C" fn fread(
 
 // size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
 // 把 ptr 所指向的数组中的数据写入到给定流 stream 中。
+#borrow(ptr)
 pub extern "C" fn fwrite(
     ptr: Bytes, 
     size: Int, 
@@ -104,7 +107,6 @@ pub extern "C" fn fwrite(
 // int fgetc(FILE *stream);
 // int getc(FILE *stream);
 // 从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动。
-#borrow(stream)
 pub extern "C" fn fgetc(stream: FILE) -> Int = "fgetc"
 pub fnalias fgetc as getc
 
@@ -127,18 +129,38 @@ pub fnalias fputc as putc
 pub extern "C" fn putchar(char: Int) -> Int = "putchar";
 
 
+
+
+
 ///|
 
-// char *fgets(char *__restrict, int, FILE *__restrict);
 
 
-
+// 	char *fgets(char *str, int n, FILE *stream);
+// 从指定的流 stream 读取一行，并把它存储在 str 所指向的字符串内。
+// 当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定。
+#borrow(str)
+pub extern "C" fn fgets(str: Bytes, n: Int, stream: FILE) -> Bytes
+    = "fgets"
 // pub extern "C" fn fgets(buffer: Pointer, size: Int, file: FILE) -> Pointer = "fgets_ffi";
 
-// int fputs(const char *__restrict, FILE *__restrict);
-// int puts(const char *);
+// 	int fputs(const char *str, FILE *stream);
+// 把字符串写入到指定的流 stream 中，但不包括空字符。
+#borrow(str)
+pub extern "C" fn fputs(str: Bytes, stream: FILE) -> Int = "fputs"
 
-// int printf(const char *__restrict, ...);
+
+
+// 	int puts(const char *str);
+// 把一个字符串写入到标准输出 stdout，直到空字符，但不包括空字符。换行符会被追加到输出中。
+#borrow(str)
+pub extern "C" fn puts(str: Bytes) -> Int = "puts"
+
+// 	int printf(const char *format, ...);
+// 发送格式化输出到标准输出 stdout。
+// pub extern "C" fn printf(format: Bytes, args: ...) -> Int = "printf";
+
+
 // int fprintf(FILE *__restrict, const char *__restrict, ...);
 // int sprintf(char *__restrict, const char *__restrict, ...);
 // int snprintf(char *__restrict, size_t, const char *__restrict, ...);
@@ -155,90 +177,28 @@ pub extern "C" fn putchar(char: Int) -> Int = "putchar";
 // int vfscanf(FILE *__restrict, const char *__restrict, __isoc_va_list);
 // int vsscanf(const char *__restrict, const char *__restrict, __isoc_va_list);
 
-// void perror(const char *);
+// 	void perror(const char *str);
+// 把一个描述性错误消息输出到标准错误 stderr。首先输出字符串 str，后跟一个冒号，然后是一个空格。
+#borrow(str)
+pub extern "C" fn perror(str: Bytes) = "perror"
 
-// int setvbuf(FILE *__restrict, char *__restrict, int, size_t);
-// void setbuf(FILE *__restrict, char *__restrict);
+// int setvbuf(FILE *stream, char *buffer, int mode, size_t size);
+// 另一个定义流 stream 应如何缓冲的函数。
+pub extern "C" fn setvbuf(
+    stream: FILE, 
+    buffer: Bytes, 
+    mode: Int, 
+    size: Int) -> Int = "setvbuf"
 
-// char *tmpnam(char *);
+// 	void setbuf(FILE *stream, char *buffer);
+// 定义流 stream 应如何缓冲。
+pub extern "C" fn setbuf(stream: FILE, buffer: Bytes) = "setbuf"
+
+//	char *tmpnam(char *str);
+// 生成并返回一个有效的临时文件名，该文件名之前是不存在的。
+#borrow(str)
+pub extern "C" fn tmpnam(str: Bytes) -> Bytes = "tmpnam"
+
 // FILE *tmpfile(void);
-
-// #if defined(_POSIX_SOURCE) || defined(_POSIX_C_SOURCE) \
-//  || defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) \
-//  || defined(_BSD_SOURCE)
-// FILE *fmemopen(void *__restrict, size_t, const char *__restrict);
-// FILE *open_memstream(char **, size_t *);
-// FILE *fdopen(int, const char *);
-// FILE *popen(const char *, const char *);
-// int pclose(FILE *);
-// int fileno(FILE *);
-// int fseeko(FILE *, off_t, int);
-// off_t ftello(FILE *);
-// int dprintf(int, const char *__restrict, ...);
-// int vdprintf(int, const char *__restrict, __isoc_va_list);
-// void flockfile(FILE *);
-// int ftrylockfile(FILE *);
-// void funlockfile(FILE *);
-// int getc_unlocked(FILE *);
-// int getchar_unlocked(void);
-// int putc_unlocked(int, FILE *);
-// int putchar_unlocked(int);
-// ssize_t getdelim(char **__restrict, size_t *__restrict, int, FILE *__restrict);
-// ssize_t getline(char **__restrict, size_t *__restrict, FILE *__restrict);
-// int renameat(int, const char *, int, const char *);
-// char *ctermid(char *);
-// #define L_ctermid 20
-// #endif
-
-// #if defined(_GNU_SOURCE)
-// #define RENAME_NOREPLACE (1 << 0)
-// #define RENAME_EXCHANGE  (1 << 1)
-// #define RENAME_WHITEOUT  (1 << 2)
-
-// int renameat2(int, const char *, int, const char *, unsigned);
-// #endif
-
-// #if defined(_XOPEN_SOURCE) || defined(_GNU_SOURCE) \
-//  || defined(_BSD_SOURCE)
-// #define P_tmpdir "/tmp"
-// char *tempnam(const char *, const char *);
-// #endif
-
-// #if defined(_GNU_SOURCE) || defined(_BSD_SOURCE)
-// #define L_cuserid 20
-// char *cuserid(char *);
-// void setlinebuf(FILE *);
-// void setbuffer(FILE *, char *, size_t);
-// int fgetc_unlocked(FILE *);
-// int fputc_unlocked(int, FILE *);
-// int fflush_unlocked(FILE *);
-// size_t fread_unlocked(void *, size_t, size_t, FILE *);
-// size_t fwrite_unlocked(const void *, size_t, size_t, FILE *);
-// void clearerr_unlocked(FILE *);
-// int feof_unlocked(FILE *);
-// int ferror_unlocked(FILE *);
-// int fileno_unlocked(FILE *);
-// int getw(FILE *);
-// int putw(int, FILE *);
-// char *fgetln(FILE *, size_t *);
-// int asprintf(char **, const char *, ...);
-// int vasprintf(char **, const char *, __isoc_va_list);
-// #endif
-
-// #ifdef _GNU_SOURCE
-// char *fgets_unlocked(char *, int, FILE *);
-// int fputs_unlocked(const char *, FILE *);
-
-// typedef ssize_t (cookie_read_function_t)(void *, char *, size_t);
-// typedef ssize_t (cookie_write_function_t)(void *, const char *, size_t);
-// typedef int (cookie_seek_function_t)(void *, off_t *, int);
-// typedef int (cookie_close_function_t)(void *);
-
-// typedef struct _IO_cookie_io_functions_t {
-// 	cookie_read_function_t *read;
-// 	cookie_write_function_t *write;
-// 	cookie_seek_function_t *seek;
-// 	cookie_close_function_t *close;
-// } cookie_io_functions_t;
-
-// FILE *fopencookie(void *, const char *, cookie_io_functions_t);
+// 以二进制更新模式(wb+)创建临时文件。
+pub extern "C" fn tmpfile() -> FILE = "tmpfile"

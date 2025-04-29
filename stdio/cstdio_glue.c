@@ -68,8 +68,6 @@
 //     clearerr((FILE *)stream); return;
 // }
 
-
-
 // MOONBIT_FFI_EXPORT
 // void rewind_ffi(void *stream) {
 //     rewind((FILE *)stream); return;
