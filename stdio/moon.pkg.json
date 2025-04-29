@@ -1,0 +1,9 @@
+{
+  "import": [
+  ],
+  "targets": {
+    "stdio.mbt": [ "native" ],
+    "check.mbt": [ "native" ]
+  },
+  "native-stub": [ "cstdio_glue.c" ]
+}
