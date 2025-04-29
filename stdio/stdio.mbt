@@ -1,69 +1,72 @@
-// extern FILE *const stdin;
-// extern FILE *const stdout;
-// extern FILE *const stderr;
 ///|
 extern type FILE
-extern type Pointer
+// extern type Pointer
 
 ///| fopen: 使用给定的模式 mode 打开 filename 所指向的文件。
 /// ```c
 /// 	FILE *fopen(const char *filename, const char *mode)
 /// ```
 #borrow(filename, mode)
-pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE = "fopen"
+pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE 
+    = "moonbit_fopen_ffi"
 
-// FILE *freopen(const char *__restrict, const char *__restrict, FILE *__restrict);
+// 	FILE *freopen(const char *filename, const char *mode, FILE *stream);
+// 把一个新的文件名 filename 与给定的打开的流 stream 关联，同时关闭流中的旧文件。
 #borrow(filename, mode)
-pub extern "C" fn freopen(filename: Bytes, mode: Bytes, file: FILE) -> FILE = "freopen_ffi"
+pub extern "C" fn freopen(filename: Bytes, mode: Bytes, file: FILE) -> FILE
+    = "freopen"
 
 ///| fclose: 关闭流 stream。刷新所有的缓冲区。
 /// ```c
 /// 	int fclose(FILE *stream);
 /// ```
-pub extern "C" fn fclose(stream : FILE) -> Int = "fclose_ffi"
+pub extern "C" fn fclose(stream : FILE) -> Int = "moonbit_fclose_ffi"
 
 // int remove(const char *filename)
 // 删除给定的文件名 filename，以便它不再被访问。
 #borrow(filename)
-pub extern "C" fn remove(filename: Bytes) -> Int = "remove"
+pub extern "C" fn remove(filename: Bytes) -> Int = "moonbit_remove_file_ffi"
 
 
 // 	int rename(const char *old_filename, const char *new_filename)
 // 把 old_filename 所指向的文件名改为 new_filename。
 #borrow(old_filename, new_filename)
-pub extern "C" fn rename(old_filename: Bytes, new_filename: Bytes) -> Int = "rename"
+pub extern "C" fn rename(old_filename: Bytes, new_filename: Bytes) -> Int
+    = "rename"
 
 
 // int feof(FILE *stream)
 // 测试给定流 stream 的文件结束标识符。
-pub extern "C" fn feof(stream: FILE) -> Int = "feof_ffi"
+pub extern "C" fn feof(stream: FILE) -> Int = "feof"
 
 // int ferror(FILE *stream);
 // 测试给定流 stream 的错误标识符。
-pub extern "C" fn ferror(stream: FILE) -> Int = "ferror_ffi"
+pub extern "C" fn ferror(stream: FILE) -> Int = "ferror"
 
 // int fflush(FILE *stream);
 // 刷新流 stream 的输出缓冲区。
-pub extern "C" fn fflush(stream: FILE) -> Int = "fflush_ffi"
+pub extern "C" fn fflush(stream: FILE) -> Int = "moonbit_fflush_ffi"
 
 
 
 // void clearerr(FILE *stream);
 // 清除给定流 stream 的文件结束和错误标识符。
-pub extern "C" fn clearerr(stream: FILE) -> Unit = "clearerr_ffi"
+pub extern "C" fn clearerr(stream: FILE) -> Unit = "clearerr"
 
 // int fseek(FILE *stream, long int offset, int whence)
 // 设置流 stream 的文件位置为给定的偏移 offset，
 // 参数 offset 意味着从给定的 whence 位置查找的字节数。
-pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int = "fseek_ffi"
+pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int 
+    = "moonbit_fseek_ffi"
+// pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int = "fseek_ffi"
 
 // long ftell(FILE *stream);
 // 返回给定流 stream 的当前文件位置。
-pub extern "C" fn ftell(stream: FILE) -> Int64 = "ftell_ffi"
+pub extern "C" fn ftell(stream: FILE) -> Int64 = "moonbit_ftell_ffi"
 
 // void rewind(FILE *stream);
 // 设置文件位置为给定流 stream 的文件的开头。
-pub extern "C" fn rewind(stream: FILE) -> Unit = "rewind_ffi"
+pub extern "C" fn rewind(stream: FILE) -> Unit = "rewind"
 
 // 	int fgetpos(FILE *stream, fpos_t *pos)
 // 获取流 stream 的当前文件位置，并把它写入到 pos。
@@ -71,19 +74,32 @@ pub extern "C" fn rewind(stream: FILE) -> Unit = "rewind_ffi"
 // stream -- 这是指向 FILE 对象的指针，该 FILE 对象标识了流。
 // pos -- 这是指向 fpos_t 对象的指针。
 // 如果成功，该函数返回零。如果发生错误，则返回非零值。
-pub extern "C" fn fgetpos(stream: FILE, pos: Int64) -> Int = "fgetpos_ffi"
+pub extern "C" fn fgetpos(stream: FILE, pos: Int64) -> Int = "fgetpos"
 
 // 	int fsetpos(FILE *stream, const fpos_t *pos)
 // 设置给定流 stream 的文件位置为给定的位置。参数 pos 是由函数 fgetpos 给定的位置。
-pub extern "C" fn fsetpos(stream: FILE, pos: Int64) -> Int = "fsetpos_ffi"
+pub extern "C" fn fsetpos(stream: FILE, pos: Int64) -> Int = "fsetpos"
 
 // 	size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 // 从给定流 stream 读取数据到 ptr 所指向的数组中。
-pub extern "C" fn fread(ptr: Pointer, size: UInt64, nmemb: UInt64, stream: FILE) -> UInt64 = "fread_ffi"
+pub extern "C" fn fread(
+    ptr: Bytes, 
+    size: Int, 
+    nmemb: Int, 
+    stream: FILE) -> Int 
+    = "moonbit_fread_ffi"
+// pub extern "C" fn fread(ptr: Pointer, size: UInt, nmemb: UInt, stream: FILE) -> UInt = "fread_ffi"
+
 
 // size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
 // 把 ptr 所指向的数组中的数据写入到给定流 stream 中。
-pub extern "C" fn fwrite(ptr: Pointer, size: UInt64, nmemb: UInt64, stream: FILE) -> UInt64 = "fwrite_ffi"
+pub extern "C" fn fwrite(
+    ptr: Bytes, 
+    size: Int, 
+    nmemb: Int, 
+    stream: FILE) -> Int 
+    = "moonbit_fwrite_ffi"
+// pub extern "C" fn fwrite(ptr: Pointer, size: UInt, nmemb: UInt, stream: FILE) -> UInt = "fwrite_ffi"
 
 // int fgetc(FILE *stream);
 // int getc(FILE *stream);
@@ -98,19 +114,25 @@ pub extern "C" fn getchar() -> Int = "getchar"
 
 // int ungetc(int char, FILE *stream);
 // 把字符 char（一个无符号字符）推入到指定的流 stream 中，以便它是下一个被读取到的字符。
-pub extern "C" fn ungetc(c: Int, stream: FILE) -> Int = "ungetc_ffi"
+pub extern "C" fn ungetc(char: Int, stream: FILE) -> Int = "ungetc"
 
 // 	int fputc(int char, FILE *stream);
 // int putc(int char, FILE *stream);
 // 把参数 char 指定的字符（一个无符号字符）写入到指定的流 stream 中，并把位置标识符往前移动。
-pub extern "C" fn fputc(c: Int, stream: FILE) -> Int = "fputc"
+pub extern "C" fn fputc(char: Int, stream: FILE) -> Int = "fputc"
 pub fnalias fputc as putc
 
 // 	int putchar(int char);
 // 把参数 char 指定的字符（一个无符号字符）写入到标准输出 stdout 中。
-pub extern "C" fn putchar(c: Int) -> Int = "putchar";
+pub extern "C" fn putchar(char: Int) -> Int = "putchar";
+
+
+///|
 
 // char *fgets(char *__restrict, int, FILE *__restrict);
+
+
+
 // pub extern "C" fn fgets(buffer: Pointer, size: Int, file: FILE) -> Pointer = "fgets_ffi";
 
 // int fputs(const char *__restrict, FILE *__restrict);
@@ -220,95 +242,3 @@ pub extern "C" fn putchar(c: Int) -> Int = "putchar";
 // } cookie_io_functions_t;
 
 // FILE *fopencookie(void *, const char *, cookie_io_functions_t);
-
-//  clearerr       check and reset stream status
-
-//  fclose         close a stream
-//  fdopen         stream open functions
-//  feof           check and reset stream status
-//  ferror         check and reset stream status
-//  fflush         flush a stream
-//  fgetc          get next character or word from input stream
-//  fgetln         get a line from a stream
-//  fgetpos        reposition a stream
-//  fgets          get a line from a stream
-//  fgetwc         get next wide character from input stream
-//  fgetws         get a line of wide characters from a stream
-//  fileno         check and reset stream status
-//  fprintf        formatted output conversion
-//  fpurge         flush a stream
-//  fputc          output a character or word to a stream
-//  fputs          output a line to a stream
-//  fputwc         output a wide character to a stream
-//  fputws         output a line of wide characters to a stream
-//  fread          binary stream input/output
-//  freopen        stream open functions
-//  fropen         open a stream
-//  fscanf         input format conversion
-//  fseek          reposition a stream
-//  fsetpos        reposition a stream
-//  ftell          reposition a stream
-//  funopen        open a stream
-//  fwide          set/get orientation of stream
-//  fwopen         open a stream
-//  fwprintf       formatted wide character output conversion
-//  fwrite         binary stream input/output
-
-//  getc           get next character or word from input stream
-//  getchar        get next character or word from input stream
-//  getdelim       get a line from a stream
-//  getline        get a line from a stream
-//  gets           get a line from a stream
-//  getw           get next character or word from input stream
-//  getwc          get next wide character from input stream
-//  getwchar       get next wide character from input stream
-
-//  mkdtemp        create unique temporary directory
-//  mkstemp        create unique temporary file
-//  mktemp         create unique temporary file
-
-//  perror         system error messages
-//  printf         formatted output conversion
-//  putc           output a character or word to a stream
-//  putchar        output a character or word to a stream
-//  puts           output a line to a stream
-//  putw           output a character or word to a stream
-//  putwc          output a wide character to a stream
-//  putwchar       output a wide character to a stream
-
-//  remove         remove directory entry
-//  rewind         reposition a stream
-
-//  scanf          input format conversion
-//  setbuf         stream buffering operations
-//  setbuffer      stream buffering operations
-//  setlinebuf     stream buffering operations
-//  setvbuf        stream buffering operations
-//  snprintf       formatted output conversion
-//  sprintf        formatted output conversion
-//  sscanf         input format conversion
-//  strerror       system error messages
-//  swprintf       formatted wide character output conversion
-//  sys_errlist    system error messages
-//  sys_nerr       system error messages
-
-//  tempnam        temporary file routines
-//  tmpfile        temporary file routines
-//  tmpnam         temporary file routines
-
-//  ungetc         un-get character from input stream
-//  ungetwc        un-get wide character from input stream
-
-//  vasprintf      formatted output conversion
-//  vfprintf       formatted output conversion
-//  vfscanf        input format conversion
-//  vfwprintf      formatted wide character output conversion
-//  vprintf        formatted output conversion
-//  vscanf         input format conversion
-//  vsnprintf      formatted output conversion
-//  vsprintf       formatted output conversion
-//  vsscanf        input format conversion
-//  vswprintf      formatted wide character output conversion
-//  vwprintf       formatted wide character output conversion
-
-//  wprintf        formatted wide character output conversion
