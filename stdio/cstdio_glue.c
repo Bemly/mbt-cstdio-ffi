@@ -8,10 +8,10 @@
 // 外部类型（extern type T）也被分配在堆上，
 // 但它们表示外部指针，因此 MoonBit 不会对它们执行任何引用计数操作。
 
-MOONBIT_FFI_EXPORT
-void *fopen_ffi(moonbit_bytes_t filename, moonbit_bytes_t mode) {
-    return fopen((const char *)filename, (const char *)mode);
-}
+// MOONBIT_FFI_EXPORT
+// void *fopen_ffi(moonbit_bytes_t filename, moonbit_bytes_t mode) {
+//     return fopen((const char *)filename, (const char *)mode);
+// }
 
 MOONBIT_FFI_EXPORT
 void *freopen_ffi(moonbit_bytes_t filename, moonbit_bytes_t mode, void *file) {
@@ -77,11 +77,6 @@ MOONBIT_FFI_EXPORT
 uint64_t fwrite_ffi(const void *ptr, uint64_t size, uint64_t nmemb, void *stream) {
     return fwrite(ptr, (size_t)size, (size_t)nmemb, (FILE *)stream);
 }
-
-// MOONBIT_FFI_EXPORT
-// int32_t fgetc_ffi(void *stream) {
-//     return fgetc((FILE *)stream);
-// }
 
 MOONBIT_FFI_EXPORT
 int32_t ungetc_ffi(int32_t c, void *stream) {

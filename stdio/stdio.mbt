@@ -10,7 +10,7 @@ extern type Pointer
 /// 	FILE *fopen(const char *filename, const char *mode)
 /// ```
 #borrow(filename, mode)
-pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE = "fopen_ffi"
+pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE = "fopen"
 
 // FILE *freopen(const char *__restrict, const char *__restrict, FILE *__restrict);
 #borrow(filename, mode)
@@ -88,6 +88,7 @@ pub extern "C" fn fwrite(ptr: Pointer, size: UInt64, nmemb: UInt64, stream: FILE
 // int fgetc(FILE *stream);
 // int getc(FILE *stream);
 // 从指定的流 stream 获取下一个字符（一个无符号字符），并把位置标识符往前移动。
+#borrow(stream)
 pub extern "C" fn fgetc(stream: FILE) -> Int = "fgetc"
 pub fnalias fgetc as getc
 
