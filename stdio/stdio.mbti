@@ -1,0 +1,74 @@
+package "bemly/cstdio-ffi/stdio"
+
+// Values
+fn clearerr(FILE) -> Unit
+
+fn fclose(FILE) -> Int
+
+fn feof(FILE) -> Int
+
+fn ferror(FILE) -> Int
+
+fn fflush(FILE) -> Int
+
+fn fgetc(FILE) -> Int
+
+fn fgetpos(FILE, Int64) -> Int
+
+fn fgets(Bytes, Int, FILE) -> Bytes
+
+fn fopen(Bytes, Bytes) -> FILE
+
+fn fputc(Int, FILE) -> Int
+
+fn fputs(Bytes, FILE) -> Int
+
+fn fread(Bytes, Int, Int, FILE) -> Int
+
+fn freopen(Bytes, Bytes, FILE) -> FILE
+
+fn fseek(FILE, Int64, Int) -> Int
+
+fn fsetpos(FILE, Int64) -> Int
+
+fn ftell(FILE) -> Int64
+
+fn fwrite(Bytes, Int, Int, FILE) -> Int
+
+fn getc(FILE) -> Int
+
+fn getchar() -> Int
+
+fn perror(Bytes) -> Unit
+
+fn putc(Int, FILE) -> Int
+
+fn putchar(Int) -> Int
+
+fn puts(Bytes) -> Int
+
+fn remove(Bytes) -> Int
+
+fn rename(Bytes, Bytes) -> Int
+
+fn rewind(FILE) -> Unit
+
+fn setbuf(FILE, Bytes) -> Unit
+
+fn setvbuf(FILE, Bytes, Int, Int) -> Int
+
+fn tmpfile() -> FILE
+
+fn tmpnam(Bytes) -> Bytes
+
+fn ungetc(Int, FILE) -> Int
+
+// Types and methods
+type FILE
+
+type check
+
+// Type aliases
+
+// Traits
+

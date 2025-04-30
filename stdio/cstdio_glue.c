@@ -9,7 +9,6 @@
 // 但它们表示外部指针，因此 MoonBit 不会对它们执行任何引用计数操作。
 
 ///////////////////////
-
 // 目前 runtime.c 一致的
 
 // moonbit_fopen_ffi
@@ -20,7 +19,6 @@
 
 
 ///////////////////////
-
 // 目前 runtime.c 已有的，但类型不同的
 
 // MOONBIT_FFI_EXPORT
@@ -37,6 +35,24 @@
 // uint64_t fwrite_ffi(const void *ptr, uint64_t size, uint64_t nmemb, void *stream) {
 //     return fwrite(ptr, (size_t)size, (size_t)nmemb, (FILE *)stream);
 // }
+
+
+///////////////////////
+// 宏
+MOONBIT_FFI_EXPORT
+inline void *stdin_ffi(void) {
+    return stdin;
+}
+
+MOONBIT_FFI_EXPORT
+inline void *stdout_ffi(void) {
+    return stdout;
+}
+
+MOONBIT_FFI_EXPORT
+inline void *stderr_ffi(void) {
+    return stderr;
+}
 
 
 ///////////////////////
@@ -87,4 +103,3 @@
 // int32_t ungetc_ffi(int32_t c, void *stream) {
 //     return ungetc(c, (FILE *)stream);
 // }
-
