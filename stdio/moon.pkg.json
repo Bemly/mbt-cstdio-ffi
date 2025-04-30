@@ -3,7 +3,9 @@
   ],
   "targets": {
     "stdio.mbt": [ "native" ],
-    "check.mbt": [ "native" ]
+    "check.mbt": [ "native" ],
+    "extra.mbt": [ "native" ],
+    "macro.mbt": [ "native" ]
   },
   "native-stub": [ "cstdio_glue.c" ]
 }

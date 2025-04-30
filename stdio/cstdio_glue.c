@@ -1,5 +1,16 @@
-#include <stdio.h>
-#include "moonbit.h"
+// Copyright 2024 International Digital Economy Academy
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 // moonbit_incref 条件
 // 存储进数据结构 
@@ -37,6 +48,8 @@
 //     return fwrite(ptr, (size_t)size, (size_t)nmemb, (FILE *)stream);
 // }
 
+#include <stdio.h>
+#include "moonbit.h"
 
 ///////////////////////
 // 宏
@@ -93,6 +106,11 @@ inline void *tmpnam_max_ffi(void) { return L_tmpnam; }
 
 MOONBIT_FFI_EXPORT
 inline void *tmp_max_ffi(void) { return TMP_MAX; }
+
+///////////////////////
+// 可变数量参数的穷举
+
+
 
 ///////////////////////
 

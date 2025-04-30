@@ -1,2 +1,2 @@
-type check
+pub type CHECKED
 

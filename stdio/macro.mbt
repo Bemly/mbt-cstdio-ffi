@@ -1,5 +1,7 @@
 ///| 文件流指针
-extern type FILE
+pub extern type FILE
+///| 文件位置指针
+pub extern type FPOS
 
 
 ///| `Bool` 是否是空指针
@@ -22,14 +24,16 @@ pub extern "C" fn seek_end() -> Int = "seek_end_ffi"
 pub extern "C" fn eof() -> Int = "eof_ffi"
 ///| `Bool` 是否是文件结束标志符
 pub fn isEOF(num: Int) -> Bool { num == eof() }
-///| 
+///| 全缓冲：对于输出，数据在缓冲填满时被一次性写入。
+/// 对于输入，缓冲会在请求输入且缓冲为空时被填充。
 pub extern "C" fn iofbf() -> Int = "iofbf_ffi"
-///| 
+///| 行缓冲：对于输出，数据在遇到换行符或者在缓冲填满时被写入，具体视情况而定。
+/// 对于输入，缓冲会在请求输入且缓冲为空时被填充，直到遇到下一个换行符。
 pub extern "C" fn iolbf() -> Int = "iolbf_ffi"
-///| 
+///| 	无缓冲：不使用缓冲。每个 I/O 操作都被即时写入。buffer 和 size 参数被忽略。
 pub extern "C" fn ionbf() -> Int = "ionbf_ffi"
 ///| `setbuf` 函数使用的缓冲区大小
-pub extern "C" fn bufsiz() -> Int = "bufsiz_ffi"
+pub extern "C" fn bufsize() -> Int = "bufsiz_ffi"
 ///| 系统可以同时打开的文件数量
 pub extern "C" fn fopen_max() -> Int = "fopen_max_ffi"
 ///| 字符数组可以存储的文件名的最大长度
