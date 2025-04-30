@@ -33,8 +33,21 @@ test "file write&append test" {
 
 test "unsafe printf test" {
     // TEST Value: printf
-    println(("printf0: ", unsafe_printf_0(b"Hello, world!\n\x00")))
+    println(("printf0: ", printf_bytes(b"Hello, world!\n\x00")))
     println(("printf1: ", unsafe_printf_1(b"%s\n\x00", ignore_type(b"str\x00"))))
     println(("printf2: ", unsafe_printf_1(b"%d\n\x00", ignore_type(20))))
     println(("printf3: ", unsafe_printf_2(b"%d %s\n\x00", ignore_type(234), ignore_type(b"www\x00"))))
+}
+
+test "string printf test" {
+    let char = '🥵'
+    printf_string("Hello, world!")
+    printf_string("Hello, world!")
+    printf_string("Hello, world!")
+    let str = 
+    #| \n
+    $| \{char} 嘻嘻
+    #| okok
+    #|
+    printf_string(str)
 }

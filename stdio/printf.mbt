@@ -1,11 +1,15 @@
+///| 单参数输出
+pub extern "C" fn printf_string(format: String) -> Unit = "moonbit_printf_ffi"
+pub extern "C" fn printf_bytes(format: Bytes) -> Int = "safe_printf_0_ffi"
+
+
+///| 彻底疯狂穷举魔法
 extern type VOID
 pub fn ignore_type[T](any: T) -> VOID = "%identity"
 
 // 	int printf(const char *format, ...);
 // 发送格式化输出到标准输出 stdout。
-
-pub extern "C" fn unsafe_printf_0(format: Bytes) -> Int
- = "safe_printf_0_ffi"
+///|
 pub extern "C" fn unsafe_printf_1(format: Bytes, a: VOID) -> Int
  = "unsafe_printf_1_ffi"
 pub extern "C" fn unsafe_printf_2(format: Bytes, a: VOID, b: VOID) -> Int
@@ -58,3 +62,6 @@ pub extern "C" fn unsafe_printf_16(format: Bytes, a: VOID, b: VOID, c: VOID, d: 
 // 使用参数列表发送格式化输出到字符串。
 
 // int vsnprintf(char *__restrict, size_t, const char *__restrict, __isoc_va_list);
+
+
+

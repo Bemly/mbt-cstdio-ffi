@@ -196,10 +196,47 @@ int32_t unsafe_printf_16_ffi(moonbit_bytes_t format, void *a, void *b, void *c, 
 
 
 ///////////////////////
-// 胶水中间件
-// inline void bytes2string(moonbit_bytes_t bytes, char *string) {
+// 官方原语做胶水
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
-// }
+MOONBIT_FFI_EXPORT
+void moonbit_printf_ffi(moonbit_string_t str) {
+#ifdef _WIN32
+  unsigned int prev_cp = GetConsoleOutputCP();
+  SetConsoleOutputCP(CP_UTF8);
+#endif
+  int32_t const len = Moonbit_array_length(str);
+  for (int32_t i = 0; i < len; ++i) {
+    uint32_t c = str[i];
+    if (0xD800 <= c && c <= 0xDBFF) {
+      c -= 0xD800;
+      i = i + 1;
+      uint32_t l = str[i] - 0xDC00;
+      c = ((c << 10) + l) + 0x10000;
+    }
+    // stdout accepts UTF-8, so convert the stream to UTF-8 first
+    if (c < 0x80) {
+      putchar(c);
+    } else if (c < 0x800) {
+      putchar(0xc0 + (c >> 6));
+      putchar(0x80 + (c & 0x3f));
+    } else if (c < 0x10000) {
+      putchar(0xe0 + (c >> 12));
+      putchar(0x80 + ((c >> 6) & 0x3f));
+      putchar(0x80 + (c & 0x3f));
+    } else {
+      putchar(0xf0 + (c >> 18));
+      putchar(0x80 + ((c >> 12) & 0x3f));
+      putchar(0x80 + ((c >> 6) & 0x3f));
+      putchar(0x80 + (c & 0x3f));
+    }
+  }
+#ifdef _WIN32
+  SetConsoleOutputCP(prev_cp);
+#endif
+}
 
 
 

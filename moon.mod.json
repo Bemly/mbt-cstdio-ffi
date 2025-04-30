@@ -2,7 +2,7 @@
   "name": "bemly/cstdio-ffi",
   "version": "0.0.0",
   "readme": "README.md",
-  "repository": "",
+  "repository": "https://github.com/Bemly/mbt-cstdio-ffi",
   "license": "Apache-2.0",
   "keywords": ["native", "stdio", "ffi", "c"],
   "description": "standard C library I/O FFI binding. \n对C标准库中stdio的绑定"

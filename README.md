@@ -1,5 +1,7 @@
 # Moonbit C standard I/O FFI Binding
 
+# WIP - This is a work in progress.
+
 A basic, direct binding connecting C standard I/O and Moonbit.\
 It follows the C standard's resource handling rules to align with C logic.\
 There is **NO garbage collection**(GC) in this FFI binding.\
