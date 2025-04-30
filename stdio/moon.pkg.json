@@ -5,7 +5,9 @@
     "stdio.mbt": [ "native" ],
     "check.mbt": [ "native" ],
     "extra.mbt": [ "native" ],
-    "macro.mbt": [ "native" ]
+    "macro.mbt": [ "native" ],
+    "printf.mbt": [ "native" ],
+    "scanf.mbt": [ "native" ]
   },
   "native-stub": [ "cstdio_glue.c" ]
 }

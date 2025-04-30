@@ -1,4 +1,10 @@
-# bemly/cstdio-ffi
+# Moonbit C standard I/O FFI Binding
+
+A basic, direct binding connecting C standard I/O and Moonbit.\
+It follows the C standard's resource handling rules to align with C logic.\
+There is **NO garbage collection**(GC) in this FFI binding.\
+**All** file streams require manual release!
+
 
 本模块是简单粗暴的用胶水把C语言标准IO和Moonbit链接起来 \
 为了最大程度的和C逻辑相同，采用IO标准本身自己的释放规则 \
