@@ -17,6 +17,7 @@
 // moonbit_fflush_ffi
 // moonbit_ftell_ffi
 
+// moonbit_is_null
 
 ///////////////////////
 // 目前 runtime.c 已有的，但类型不同的
@@ -40,6 +41,11 @@
 ///////////////////////
 // 宏
 MOONBIT_FFI_EXPORT
+inline void *null_ffi(void) {
+    return NULL;
+}
+
+MOONBIT_FFI_EXPORT
 inline void *stdin_ffi(void) {
     return stdin;
 }
@@ -52,6 +58,11 @@ inline void *stdout_ffi(void) {
 MOONBIT_FFI_EXPORT
 inline void *stderr_ffi(void) {
     return stderr;
+}
+
+MOONBIT_FFI_EXPORT
+inline void *eof_ffi(void) {
+    return EOF;
 }
 
 
