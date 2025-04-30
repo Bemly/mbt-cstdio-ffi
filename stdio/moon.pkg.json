@@ -7,7 +7,9 @@
     "extra.mbt": [ "native" ],
     "macro.mbt": [ "native" ],
     "printf.mbt": [ "native" ],
-    "scanf.mbt": [ "native" ]
+    "scanf.mbt": [ "native" ],
+    "stdio_test.mbt": [ "native" ]
   },
-  "native-stub": [ "cstdio_glue.c" ]
+  "native-stub": [ "cstdio_glue.c" ],
+  "test-import": [ "Bemly/cstdio-ffi/stdio" ]
 }

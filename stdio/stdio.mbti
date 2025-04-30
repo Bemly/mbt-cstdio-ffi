@@ -1,7 +1,11 @@
-package "bemly/cstdio-ffi/stdio"
+package "Bemly/cstdio-ffi/stdio"
 
 // Values
+fn bufsize() -> Int
+
 fn clearerr(FILE) -> Unit
+
+fn eof() -> Int
 
 fn fclose(FILE) -> Int
 
@@ -13,11 +17,15 @@ fn fflush(FILE) -> Int
 
 fn fgetc(FILE) -> Int
 
-fn fgetpos(FILE, Int64) -> Int
+fn fgetpos(FILE, FPOS) -> Int
 
 fn fgets(Bytes, Int, FILE) -> Bytes
 
+fn filename_max() -> Int
+
 fn fopen(Bytes, Bytes) -> FILE
+
+fn fopen_max() -> Int
 
 fn fputc(Int, FILE) -> Int
 
@@ -29,7 +37,7 @@ fn freopen(Bytes, Bytes, FILE) -> FILE
 
 fn fseek(FILE, Int64, Int) -> Int
 
-fn fsetpos(FILE, Int64) -> Int
+fn fsetpos(FILE, FPOS) -> Int
 
 fn ftell(FILE) -> Int64
 
@@ -39,7 +47,25 @@ fn getc(FILE) -> Int
 
 fn getchar() -> Int
 
+fn ignore_type[T](T) -> VOID
+
+fn iofbf() -> Int
+
+fn iolbf() -> Int
+
+fn ionbf() -> Int
+
+fn isEOF(Int) -> Bool
+
+fn isNULL(FILE) -> Bool
+
+fn null() -> FILE
+
 fn perror(Bytes) -> Unit
+
+fn printf_bytes(Bytes) -> Int
+
+fn printf_string(String) -> Unit
 
 fn putc(Int, FILE) -> Int
 
@@ -53,20 +79,72 @@ fn rename(Bytes, Bytes) -> Int
 
 fn rewind(FILE) -> Unit
 
+fn seek_cur() -> Int
+
+fn seek_end() -> Int
+
+fn seek_set() -> Int
+
 fn setbuf(FILE, Bytes) -> Unit
 
 fn setvbuf(FILE, Bytes, Int, Int) -> Int
+
+fn stderr() -> FILE
+
+fn stdin() -> FILE
+
+fn stdout() -> FILE
+
+fn tmp_max() -> Int
 
 fn tmpfile() -> FILE
 
 fn tmpnam(Bytes) -> Bytes
 
+fn tmpnam_max() -> Int
+
 fn ungetc(Int, FILE) -> Int
 
-// Types and methods
-type FILE
+fn unsafe_printf_1(Bytes, VOID) -> Int
 
-type check
+fn unsafe_printf_10(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_11(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_12(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_13(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_14(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_15(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_16(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_2(Bytes, VOID, VOID) -> Int
+
+fn unsafe_printf_3(Bytes, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_4(Bytes, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_5(Bytes, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_6(Bytes, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_7(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_8(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+fn unsafe_printf_9(Bytes, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID, VOID) -> Int
+
+// Types and methods
+pub type CHECKED
+
+pub extern type FILE
+
+pub extern type FPOS
+
+type VOID
 
 // Type aliases
 
