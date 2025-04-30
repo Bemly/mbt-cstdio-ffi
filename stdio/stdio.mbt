@@ -1,34 +1,3 @@
-///| 文件流指针
-extern type FILE
-
-
-///| `Bool` 是否是空指针
-pub extern "C" fn isNULL(ptr : FILE) -> Bool = "moonbit_is_null"
-///| `FILE` 空指针
-pub extern "C" fn null() -> FILE = "null_ffi"
-///| `FILE` 标准输入流
-pub extern "C" fn stdin() -> FILE = "stdin_ffi"
-///| `FILE` 标准输出流
-pub extern "C" fn stdout() -> FILE = "stdout_ffi"
-///| `FILE` 标准错误流
-pub extern "C" fn stderr() -> FILE = "stderr_ffi"
-///| `SEEK` fseek位置定位器
-/// - `SEEK::SET(0)`: 从文件开头开始偏移
-/// - `SEEK::CUR(1)`: 从当前位置开始偏移
-/// - `SEEK::END(2)`: 从文件末尾开始偏移
-enum SEEK {
-    SET = 0
-    CUR = 1
-    END = 2
-}
-///| `EOF` 文件结束标志符
-pub let eof: Int = -1
-///| `Bool` 是否是文件结束标志符
-pub fn isEOF(num: Int) -> Bool { num == eof }
-
-
-
-
 ///| FILE *fopen(const char *filename, const char *mode);
 /// 
 /// 使用给定的模式 mode 打开 filename 所指向的文件。
@@ -147,7 +116,7 @@ pub extern "C" fn clearerr(stream: FILE) -> Unit = "clearerr"
 /// 设置流 stream 的文件位置为给定的偏移 offset，
 /// offset: 偏移量，whence: SEEK_SET, SEEK_CUR, SEEK_END
 
-pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: SEEK) -> Int 
+pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int 
     = "moonbit_fseek_ffi"
 // pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int = "fseek_ffi"
 

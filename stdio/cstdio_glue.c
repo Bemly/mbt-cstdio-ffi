@@ -41,30 +41,58 @@
 ///////////////////////
 // 宏
 MOONBIT_FFI_EXPORT
-inline void *null_ffi(void) {
-    return NULL;
+inline void *null_ffi(void) { return NULL; }
+
+MOONBIT_FFI_EXPORT
+inline void *stdin_ffi(void) { return stdin; }
+
+MOONBIT_FFI_EXPORT
+inline void *stdout_ffi(void) { return stdout; }
+
+MOONBIT_FFI_EXPORT
+inline void *stderr_ffi(void) { return stderr; }
+
+MOONBIT_FFI_EXPORT
+inline void *seek_set_ffi(void) { return SEEK_SET; }
+
+MOONBIT_FFI_EXPORT
+inline void *seek_cur_ffi(void) { return SEEK_CUR; }
+
+MOONBIT_FFI_EXPORT
+inline void *seek_end_ffi(void) { return SEEK_END; }
+
+MOONBIT_FFI_EXPORT
+inline void *eof_ffi(void) { return EOF; }
+
+MOONBIT_FFI_EXPORT
+inline void *iofbf_ffi(void) { return _IOFBF; }
+
+MOONBIT_FFI_EXPORT
+inline void *iolbf_ffi(void) { return _IOLBF; }
+
+MOONBIT_FFI_EXPORT
+inline void *ionbf_ffi(void) { return _IONBF; }
+
+MOONBIT_FFI_EXPORT
+inline void *bufsiz_ffi(void) { return BUFSIZ; }
+
+MOONBIT_FFI_EXPORT
+inline void *fopen_max_ffi(void) { return FOPEN_MAX; }
+
+MOONBIT_FFI_EXPORT
+inline void *filename_max_ffi(void) {
+#ifdef FILENAME_MAX
+    return FILENAME_MAX;
+#else
+    return 255;
+#endif
 }
 
 MOONBIT_FFI_EXPORT
-inline void *stdin_ffi(void) {
-    return stdin;
-}
+inline void *tmpnam_max_ffi(void) { return L_tmpnam; }
 
 MOONBIT_FFI_EXPORT
-inline void *stdout_ffi(void) {
-    return stdout;
-}
-
-MOONBIT_FFI_EXPORT
-inline void *stderr_ffi(void) {
-    return stderr;
-}
-
-MOONBIT_FFI_EXPORT
-inline void *eof_ffi(void) {
-    return EOF;
-}
-
+inline void *tmp_max_ffi(void) { return TMP_MAX; }
 
 ///////////////////////
 
