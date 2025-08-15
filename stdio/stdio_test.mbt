@@ -12,44 +12,63 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-fnalias @stdio.(fopen, isNULL, perror, ignore_type, printf_bytes, unsafe_printf_1, unsafe_printf_2, printf_string)
+///|
+fnalias @stdio.(
+  fopen,
+  isNULL,
+  perror,
+  ignore_type,
+  printf_bytes,
+  unsafe_printf_1,
+  unsafe_printf_2,
+  printf_string
+)
 
+///|
 test "no file test" {
-    // TEST Value: fopen perror isNULL
-    let fd: @stdio.FILE = fopen(b"no-exist.txt\x00", b"r+\x00")
-    perror("fopen")
-    assert_eq!(isNULL(fd), true)
+  // TEST Value: fopen perror isNULL
+  let fd : @stdio.FILE = fopen(b"no-exist.txt\x00", b"r+\x00")
+  perror("fopen")
+  assert_eq(isNULL(fd), true)
 }
 
+///|
 test "file write&append test" {
-    // TEST Value: fopen perror isNULL
+  // TEST Value: fopen perror isNULL
 
-    // open file stream
-    let fd: @stdio.FILE = fopen(b"test.txt\x00", b"w+\x00")
-    perror("fopen")
-    assert_eq!(isNULL(fd), false)
+  // open file stream
+  let fd : @stdio.FILE = fopen(b"test.txt\x00", b"w+\x00")
+  perror("fopen")
+  assert_eq(isNULL(fd), false)
 
-    // write to file
+  // write to file
 
 }
 
+///|
 test "unsafe printf test" {
-    // TEST Value: printf
-    println(("printf0: ", printf_bytes(b"Hello, world!\n\x00")))
-    println(("printf1: ", unsafe_printf_1(b"%s\n\x00", ignore_type(b"str\x00"))))
-    println(("printf2: ", unsafe_printf_1(b"%d\n\x00", ignore_type(20))))
-    println(("printf3: ", unsafe_printf_2(b"%d %s\n\x00", ignore_type(234), ignore_type(b"www\x00"))))
+  // TEST Value: printf
+  println(("printf0: ", printf_bytes(b"Hello, world!\n\x00")))
+  println(("printf1: ", unsafe_printf_1(b"%s\n\x00", ignore_type(b"str\x00"))))
+  println(("printf2: ", unsafe_printf_1(b"%d\n\x00", ignore_type(20))))
+  println(
+    (
+      "printf3: ",
+      unsafe_printf_2(b"%d %s\n\x00", ignore_type(234), ignore_type(b"www\x00")),
+    ),
+  )
 }
 
+///|
 test "string printf test" {
-    let char = '🥵'
-    printf_string("Hello, world!")
-    printf_string("Hello, world!")
-    printf_string("Hello, world!")
-    let str = 
+  let char = '🥵'
+  printf_string("Hello, world!")
+  printf_string("Hello, world!")
+  printf_string("Hello, world!")
+  let str =
     #| \n
     $| \{char} 嘻嘻
     #| okok
     #|
-    printf_string(str)
+  printf_string(str)
 }
