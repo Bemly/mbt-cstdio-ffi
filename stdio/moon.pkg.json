@@ -10,6 +10,5 @@
     "scanf.mbt": [ "native" ],
     "stdio_test.mbt": [ "native" ]
   },
-  "native-stub": [ "cstdio_glue.c" ],
-  "test-import": [ "Bemly/cstdio-ffi/stdio" ]
+  "native-stub": [ "cstdio_glue.c" ]
 }

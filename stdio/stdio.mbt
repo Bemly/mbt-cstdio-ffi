@@ -32,8 +32,7 @@
 /// ```moonbit
 /// ```
 #borrow(filename, mode)
-pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE 
-    = "moonbit_fopen_ffi"
+pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE = "moonbit_fopen_ffi"
 
 ///| FILE *freopen(const char *filename, const char *mode, FILE *stream);
 /// 
@@ -53,8 +52,7 @@ pub extern "C" fn fopen(filename : Bytes, mode : Bytes) -> FILE
 /// 返回失败会向 *errno* 写入错误信息, 可使用 *perror* 函数获取
 ///
 #borrow(filename, mode)
-pub extern "C" fn freopen(filename: Bytes, mode: Bytes, file: FILE) -> FILE
-    = "freopen"
+pub extern "C" fn freopen(filename : Bytes, mode : Bytes, file : FILE) -> FILE = "freopen"
 
 ///| int fclose(FILE *stream);
 /// 
@@ -90,8 +88,7 @@ pub extern "C" fn fclose(stream : FILE) -> Int = "moonbit_fclose_ffi"
 /// 示例 :
 /// 
 #borrow(filename)
-pub extern "C" fn remove(filename: Bytes) -> Int = "moonbit_remove_file_ffi"
-
+pub extern "C" fn remove(filename : Bytes) -> Int = "moonbit_remove_file_ffi"
 
 ///| int rename(const char *old_filename, const char *new_filename);
 /// 
@@ -110,8 +107,7 @@ pub extern "C" fn remove(filename: Bytes) -> Int = "moonbit_remove_file_ffi"
 /// 示例 :
 /// 
 #borrow(old_filename, new_filename)
-pub extern "C" fn rename(old_filename: Bytes, new_filename: Bytes) -> Int
-    = "rename"
+pub extern "C" fn rename(old_filename : Bytes, new_filename : Bytes) -> Int = "rename"
 
 ///| int feof(FILE *stream);
 /// 
@@ -128,7 +124,7 @@ pub extern "C" fn rename(old_filename: Bytes, new_filename: Bytes) -> Int
 ///
 /// 示例 :
 /// 
-pub extern "C" fn feof(stream: FILE) -> Int = "feof"
+pub extern "C" fn feof(stream : FILE) -> Int = "feof"
 
 ///| int ferror(FILE *stream);
 /// 
@@ -142,7 +138,7 @@ pub extern "C" fn feof(stream: FILE) -> Int = "feof"
 ///
 /// 示例 :
 /// 
-pub extern "C" fn ferror(stream: FILE) -> Int = "ferror"
+pub extern "C" fn ferror(stream : FILE) -> Int = "ferror"
 
 ///| int fflush(FILE *stream);
 /// 
@@ -162,7 +158,7 @@ pub extern "C" fn ferror(stream: FILE) -> Int = "ferror"
 ///
 /// 示例 :
 /// 
-pub extern "C" fn fflush(stream: FILE) -> Int = "moonbit_fflush_ffi"
+pub extern "C" fn fflush(stream : FILE) -> Int = "moonbit_fflush_ffi"
 
 ///| void clearerr(FILE *stream);
 /// 
@@ -175,7 +171,7 @@ pub extern "C" fn fflush(stream: FILE) -> Int = "moonbit_fflush_ffi"
 /// 不会检测传入的流是否正确, 请自行保证正确性。
 /// 
 /// 示例 :
-pub extern "C" fn clearerr(stream: FILE) -> Unit = "clearerr"
+pub extern "C" fn clearerr(stream : FILE) -> Unit = "clearerr"
 
 ///| int fseek(FILE *stream, long int offset, int whence);
 /// 
@@ -198,8 +194,7 @@ pub extern "C" fn clearerr(stream: FILE) -> Unit = "clearerr"
 /// 
 /// 示例 :
 /// 
-pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int 
-    = "moonbit_fseek_ffi"
+pub extern "C" fn fseek(stream : FILE, offset : Int64, whence : Int) -> Int = "moonbit_fseek_ffi"
 // pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int = "fseek_ffi"
 
 ///| long ftell(FILE *stream);
@@ -216,7 +211,7 @@ pub extern "C" fn fseek(stream: FILE, offset: Int64, whence: Int) -> Int
 /// 返回失败会向 *errno* 写入错误信息, 可使用 *perror* 函数获取
 /// 
 /// 示例 :
-pub extern "C" fn ftell(stream: FILE) -> Int64 = "moonbit_ftell_ffi"
+pub extern "C" fn ftell(stream : FILE) -> Int64 = "moonbit_ftell_ffi"
 
 ///| void rewind(FILE *stream);
 /// 
@@ -229,7 +224,7 @@ pub extern "C" fn ftell(stream: FILE) -> Int64 = "moonbit_ftell_ffi"
 /// 等价于 `fseek(stream, 0, seek_set())`
 /// 
 /// 示例 :
-pub extern "C" fn rewind(stream: FILE) -> Unit = "rewind"
+pub extern "C" fn rewind(stream : FILE) -> Unit = "rewind"
 
 ///| int fgetpos(FILE *stream, fpos_t *pos);
 /// 
@@ -243,7 +238,7 @@ pub extern "C" fn rewind(stream: FILE) -> Unit = "rewind"
 /// - `int`: 0 成功, !0 失败
 /// 
 /// 示例 :
-pub extern "C" fn fgetpos(stream: FILE, pos: FPOS) -> Int = "fgetpos"
+pub extern "C" fn fgetpos(stream : FILE, pos : FPOS) -> Int = "fgetpos"
 
 ///| int fsetpos(FILE *stream, const fpos_t *pos);
 /// 
@@ -260,7 +255,7 @@ pub extern "C" fn fgetpos(stream: FILE, pos: FPOS) -> Int = "fgetpos"
 /// 返回失败会向 *errno* 写入错误信息, 可使用 *perror* 函数获取
 /// 
 /// 示例 :
-pub extern "C" fn fsetpos(stream: FILE, pos: FPOS) -> Int = "fsetpos"
+pub extern "C" fn fsetpos(stream : FILE, pos : FPOS) -> Int = "fsetpos"
 
 ///| size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream);
 /// 
@@ -281,11 +276,11 @@ pub extern "C" fn fsetpos(stream: FILE, pos: FPOS) -> Int = "fsetpos"
 /// 示例 :
 #borrow(ptr)
 pub extern "C" fn fread(
-    ptr: Bytes, 
-    size: Int, 
-    nmemb: Int, 
-    stream: FILE) -> Int 
-    = "moonbit_fread_ffi"
+  ptr : Bytes,
+  size : Int,
+  nmemb : Int,
+  stream : FILE,
+) -> Int = "moonbit_fread_ffi"
 // pub extern "C" fn fread(ptr: Pointer, size: UInt, nmemb: UInt, stream: FILE) -> UInt = "fread_ffi"
 
 ///| size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream);
@@ -307,11 +302,11 @@ pub extern "C" fn fread(
 /// 示例 :
 #borrow(ptr)
 pub extern "C" fn fwrite(
-    ptr: Bytes, 
-    size: Int, 
-    nmemb: Int, 
-    stream: FILE) -> Int 
-    = "moonbit_fwrite_ffi"
+  ptr : Bytes,
+  size : Int,
+  nmemb : Int,
+  stream : FILE,
+) -> Int = "moonbit_fwrite_ffi"
 // pub extern "C" fn fwrite(ptr: Pointer, size: UInt, nmemb: UInt, stream: FILE) -> UInt = "fwrite_ffi"
 
 ///| int fgetc(FILE *stream);\
@@ -326,7 +321,9 @@ pub extern "C" fn fwrite(
 /// - `int`: 若成功，返回下一个字符(unsigned char), EOF(-1): 到达文件末尾或发生错误
 /// 
 /// 示例 :
-pub extern "C" fn fgetc(stream: FILE) -> Int = "fgetc"
+pub extern "C" fn fgetc(stream : FILE) -> Int = "fgetc"
+
+///|
 pub fnalias fgetc as getc
 
 ///| int getchar(void);
@@ -351,7 +348,7 @@ pub extern "C" fn getchar() -> Int = "getchar"
 /// - `int`: 若成功，返回 char，否则返回 EOF(-1)
 /// 
 /// 示例 :
-pub extern "C" fn ungetc(char: Int, stream: FILE) -> Int = "ungetc"
+pub extern "C" fn ungetc(char : Int, stream : FILE) -> Int = "ungetc"
 
 ///| int fputc(int char, FILE *stream);
 /// int putc(int char, FILE *stream);
@@ -366,7 +363,9 @@ pub extern "C" fn ungetc(char: Int, stream: FILE) -> Int = "ungetc"
 /// - `int`: 若成功，返回 *char*，否则返回 EOF(-1)
 /// 
 /// 示例 :
-pub extern "C" fn fputc(char: Int, stream: FILE) -> Int = "fputc"
+pub extern "C" fn fputc(char : Int, stream : FILE) -> Int = "fputc"
+
+///|
 pub fnalias fputc as putc
 
 ///| int putchar(int char);
@@ -380,7 +379,7 @@ pub fnalias fputc as putc
 /// - `int`: 若成功，返回 *char*，否则返回 EOF(-1)
 /// 
 /// 示例 :
-pub extern "C" fn putchar(char: Int) -> Int = "putchar";
+pub extern "C" fn putchar(char : Int) -> Int = "putchar"
 
 ///| char *fgets(char *str, int n, FILE *stream);
 /// 
@@ -400,8 +399,7 @@ pub extern "C" fn putchar(char: Int) -> Int = "putchar";
 /// 
 /// 示例 :
 #borrow(str)
-pub extern "C" fn fgets(str: Bytes, n: Int, stream: FILE) -> Bytes
-    = "fgets"
+pub extern "C" fn fgets(str : Bytes, n : Int, stream : FILE) -> Bytes = "fgets"
 // pub extern "C" fn fgets(buffer: Pointer, size: Int, file: FILE) -> Pointer = "fgets_ffi";
 
 // gets
@@ -420,7 +418,7 @@ pub extern "C" fn fgets(str: Bytes, n: Int, stream: FILE) -> Bytes
 /// 
 /// 示例 :
 #borrow(str)
-pub extern "C" fn fputs(str: Bytes, stream: FILE) -> Int = "fputs"
+pub extern "C" fn fputs(str : Bytes, stream : FILE) -> Int = "fputs"
 
 ///| int puts(const char *str);
 /// 
@@ -434,7 +432,7 @@ pub extern "C" fn fputs(str: Bytes, stream: FILE) -> Int = "fputs"
 /// 
 /// 示例 :
 #borrow(str)
-pub extern "C" fn puts(str: Bytes) -> Int = "puts"
+pub extern "C" fn puts(str : Bytes) -> Int = "puts"
 
 ///| void perror(const char *str);
 /// 
@@ -448,7 +446,7 @@ pub extern "C" fn puts(str: Bytes) -> Int = "puts"
 /// 
 /// 示例 :
 #borrow(str)
-pub extern "C" fn perror(str: Bytes) -> Unit = "perror"
+pub extern "C" fn perror(str : Bytes) -> Unit = "perror"
 
 ///| int setvbuf(FILE *stream, char *buffer, int mode, size_t size);
 /// 
@@ -471,10 +469,11 @@ pub extern "C" fn perror(str: Bytes) -> Unit = "perror"
 /// 
 /// 示例 :
 pub extern "C" fn setvbuf(
-    stream: FILE, 
-    buffer: Bytes, 
-    mode: Int, 
-    size: Int) -> Int = "setvbuf"
+  stream : FILE,
+  buffer : Bytes,
+  mode : Int,
+  size : Int,
+) -> Int = "setvbuf"
 
 ///| void setbuf(FILE *stream, char *buffer);
 /// 
@@ -490,7 +489,7 @@ pub extern "C" fn setvbuf(
 /// - `buffer == NULL` 等价于 `setvbuf(stream, NULL, ionbf(), 0)`
 /// 
 /// 示例 :  
-pub extern "C" fn setbuf(stream: FILE, buffer: Bytes) -> Unit = "setbuf"
+pub extern "C" fn setbuf(stream : FILE, buffer : Bytes) -> Unit = "setbuf"
 
 ///| char *tmpnam(char *str);
 /// 
@@ -507,7 +506,7 @@ pub extern "C" fn setbuf(stream: FILE, buffer: Bytes) -> Unit = "setbuf"
 /// 
 /// 示例 :
 #borrow(str)
-pub extern "C" fn tmpnam(str: Bytes) -> Bytes = "tmpnam"
+pub extern "C" fn tmpnam(str : Bytes) -> Bytes = "tmpnam"
 
 ///| FILE *tmpfile(void);
 /// 
