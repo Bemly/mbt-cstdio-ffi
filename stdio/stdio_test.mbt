@@ -13,21 +13,11 @@
 // limitations under the License.
 
 ///|
-fnalias @stdio.(
-  fopen,
-  isNULL,
-  perror,
-  ignore_type,
-  printf_bytes,
-  unsafe_printf_1,
-  unsafe_printf_2,
-  printf_string
-)
 
 ///|
 test "no file test" {
   // TEST Value: fopen perror isNULL
-  let fd : @stdio.FILE = fopen(b"no-exist.txt\x00", b"r+\x00")
+  let fd : FILE = fopen(b"no-exist.txt\x00", b"r+\x00")
   perror("fopen")
   assert_eq(isNULL(fd), true)
 }
@@ -37,7 +27,7 @@ test "file write&append test" {
   // TEST Value: fopen perror isNULL
 
   // open file stream
-  let fd : @stdio.FILE = fopen(b"test.txt\x00", b"w+\x00")
+  let fd : FILE = fopen(b"test.txt\x00", b"w+\x00")
   perror("fopen")
   assert_eq(isNULL(fd), false)
 
