@@ -1,10 +1,12 @@
-///| 单参数输出
+///|
+/// 单参数输出
 pub extern "C" fn printf_string(format : String) -> Unit = "moonbit_printf_ffi"
 
 ///|
 pub extern "C" fn printf_bytes(format : Bytes) -> Int = "safe_printf_0_ffi"
 
-///| 彻底疯狂穷举魔法
+///|
+/// 彻底疯狂穷举魔法
 #external
 type VOID
 

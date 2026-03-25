@@ -1,14 +1,15 @@
-{
-  "import": [
-  ],
-  "targets": {
-    "stdio.mbt": [ "native" ],
+import {
+}
+
+options(
+  "native-stub": [ "cstdio_glue.c" ],
+  targets: {
     "check.mbt": [ "native" ],
     "extra.mbt": [ "native" ],
     "macro.mbt": [ "native" ],
     "printf.mbt": [ "native" ],
     "scanf.mbt": [ "native" ],
-    "stdio_test.mbt": [ "native" ]
+    "stdio.mbt": [ "native" ],
+    "stdio_test.mbt": [ "native" ],
   },
-  "native-stub": [ "cstdio_glue.c" ]
-}
+)
