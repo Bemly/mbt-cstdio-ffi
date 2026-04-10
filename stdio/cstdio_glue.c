@@ -53,47 +53,33 @@
 
 ///////////////////////
 // 宏
-MOONBIT_FFI_EXPORT
-inline void *null_ffi(void) { return NULL; }
+MOONBIT_FFI_EXPORT void *null_ffi(void) { return NULL; }
 
-MOONBIT_FFI_EXPORT
-inline void *stdin_ffi(void) { return stdin; }
+MOONBIT_FFI_EXPORT void *stdin_ffi(void) { return stdin; }
 
-MOONBIT_FFI_EXPORT
-inline void *stdout_ffi(void) { return stdout; }
+MOONBIT_FFI_EXPORT void *stdout_ffi(void) { return stdout; }
 
-MOONBIT_FFI_EXPORT
-inline void *stderr_ffi(void) { return stderr; }
+MOONBIT_FFI_EXPORT void *stderr_ffi(void) { return stderr; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t seek_set_ffi(void) { return SEEK_SET; }
+MOONBIT_FFI_EXPORT int32_t seek_set_ffi(void) { return SEEK_SET; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t seek_cur_ffi(void) { return SEEK_CUR; }
+MOONBIT_FFI_EXPORT int32_t seek_cur_ffi(void) { return SEEK_CUR; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t seek_end_ffi(void) { return SEEK_END; }
+MOONBIT_FFI_EXPORT int32_t seek_end_ffi(void) { return SEEK_END; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t eof_ffi(void) { return EOF; }
+MOONBIT_FFI_EXPORT int32_t eof_ffi(void) { return EOF; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t iofbf_ffi(void) { return _IOFBF; }
+MOONBIT_FFI_EXPORT int32_t iofbf_ffi(void) { return _IOFBF; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t iolbf_ffi(void) { return _IOLBF; }
+MOONBIT_FFI_EXPORT int32_t iolbf_ffi(void) { return _IOLBF; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t ionbf_ffi(void) { return _IONBF; }
+MOONBIT_FFI_EXPORT int32_t ionbf_ffi(void) { return _IONBF; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t bufsiz_ffi(void) { return BUFSIZ; }
+MOONBIT_FFI_EXPORT int32_t bufsiz_ffi(void) { return BUFSIZ; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t fopen_max_ffi(void) { return FOPEN_MAX; }
+MOONBIT_FFI_EXPORT int32_t fopen_max_ffi(void) { return FOPEN_MAX; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t filename_max_ffi(void) {
+MOONBIT_FFI_EXPORT int32_t filename_max_ffi(void) {
 #ifdef FILENAME_MAX
     return FILENAME_MAX;
 #else
@@ -101,11 +87,9 @@ inline int32_t filename_max_ffi(void) {
 #endif
 }
 
-MOONBIT_FFI_EXPORT
-inline int32_t tmpnam_max_ffi(void) { return L_tmpnam; }
+MOONBIT_FFI_EXPORT int32_t tmpnam_max_ffi(void) { return L_tmpnam; }
 
-MOONBIT_FFI_EXPORT
-inline int32_t tmp_max_ffi(void) { return TMP_MAX; }
+MOONBIT_FFI_EXPORT int32_t tmp_max_ffi(void) { return TMP_MAX; }
 
 ///////////////////////
 // 可变数量参数的穷举
@@ -243,49 +227,293 @@ void moonbit_printf_ffi(moonbit_string_t str) {
 
 ///////////////////////
 
-// MOONBIT_FFI_EXPORT
-// void *freopen_ffi(
-//     moonbit_bytes_t filename, 
-//     moonbit_bytes_t mode, 
-//     void *file) {
-//     return freopen(
-//         (const char *)filename, 
-//         (const char *)mode, 
-//         (FILE *)file);
-// }
+///////////////////////
+// Macro / utility
+MOONBIT_FFI_EXPORT
+moonbit_bytes_t make_buf_ffi(int32_t size) {
+    return moonbit_make_bytes(size, 0);
+}
 
-// MOONBIT_FFI_EXPORT
-// int32_t feof_ffi(void *stream) {
-//     return feof((FILE *)stream);
-// }
+///////////////////////
+// scanf family - variadic enumeration
+// int scanf(const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t scanf_0_ffi(moonbit_bytes_t format) {
+    return scanf((const char *)format);
+}
 
-// MOONBIT_FFI_EXPORT
-// int32_t ferror_ffi(void *stream) {
-//     return ferror((FILE *)stream);
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_1_ffi(moonbit_bytes_t format, moonbit_bytes_t a) {
+    return scanf((const char *)format, (void *)a);
+}
 
+MOONBIT_FFI_EXPORT
+int32_t scanf_2_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b) {
+    return scanf((const char *)format, (void *)a, (void *)b);
+}
 
-// MOONBIT_FFI_EXPORT
-// void clearerr_ffi(void *stream) {
-//     clearerr((FILE *)stream); return;
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_3_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c);
+}
 
-// MOONBIT_FFI_EXPORT
-// void rewind_ffi(void *stream) {
-//     rewind((FILE *)stream); return;
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_4_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c, (void *)d);
+}
 
-// MOONBIT_FFI_EXPORT
-// int32_t fgetpos_ffi(void *stream, int64_t *pos) {
-//     return fgetpos((FILE *)stream, (fpos_t *)pos);
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_5_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e);
+}
 
-// MOONBIT_FFI_EXPORT
-// int32_t fsetpos_ffi(void *stream, int64_t *pos) {
-//     return fsetpos((FILE *)stream, (const fpos_t *)pos);
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_6_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f);
+}
 
-// MOONBIT_FFI_EXPORT
-// int32_t ungetc_ffi(int32_t c, void *stream) {
-//     return ungetc(c, (FILE *)stream);
-// }
+MOONBIT_FFI_EXPORT
+int32_t scanf_7_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t scanf_8_ffi(moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g, moonbit_bytes_t h) {
+    return scanf((const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g, (void *)h);
+}
+
+// int fscanf(FILE *stream, const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t fscanf_0_ffi(void *stream, moonbit_bytes_t format) {
+    return fscanf((FILE *)stream, (const char *)format);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_1_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_2_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_3_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_4_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_5_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_6_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_7_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fscanf_8_ffi(void *stream, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g, moonbit_bytes_t h) {
+    return fscanf((FILE *)stream, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g, (void *)h);
+}
+
+// int sscanf(const char *str, const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t sscanf_0_ffi(moonbit_bytes_t str, moonbit_bytes_t format) {
+    return sscanf((const char *)str, (const char *)format);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_1_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a) {
+    return sscanf((const char *)str, (const char *)format, (void *)a);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_2_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_3_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_4_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_5_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_6_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_7_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sscanf_8_ffi(moonbit_bytes_t str, moonbit_bytes_t format, moonbit_bytes_t a, moonbit_bytes_t b, moonbit_bytes_t c, moonbit_bytes_t d, moonbit_bytes_t e, moonbit_bytes_t f, moonbit_bytes_t g, moonbit_bytes_t h) {
+    return sscanf((const char *)str, (const char *)format, (void *)a, (void *)b, (void *)c, (void *)d, (void *)e, (void *)f, (void *)g, (void *)h);
+}
+
+///////////////////////
+// fprintf family - variadic enumeration
+// int fprintf(FILE *stream, const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t fprintf_0_ffi(void *stream, moonbit_bytes_t format) {
+    return fprintf((FILE *)stream, "%s", (const char *)format);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_1_ffi(void *stream, moonbit_bytes_t format, void *a) {
+    return fprintf((FILE *)stream, (const char *)format, a);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_2_ffi(void *stream, moonbit_bytes_t format, void *a, void *b) {
+    return fprintf((FILE *)stream, (const char *)format, a, b);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_3_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_4_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c, void *d) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c, d);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_5_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c, d, e);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_6_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c, d, e, f);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_7_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c, d, e, f, g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t fprintf_8_ffi(void *stream, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h) {
+    return fprintf((FILE *)stream, (const char *)format, a, b, c, d, e, f, g, h);
+}
+
+///////////////////////
+// sprintf family - variadic enumeration
+// int sprintf(char *str, const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t sprintf_0_ffi(moonbit_bytes_t str, moonbit_bytes_t format) {
+    return sprintf((char *)str, "%s", (const char *)format);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_1_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a) {
+    return sprintf((char *)str, (const char *)format, a);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_2_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b) {
+    return sprintf((char *)str, (const char *)format, a, b);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_3_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c) {
+    return sprintf((char *)str, (const char *)format, a, b, c);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_4_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c, void *d) {
+    return sprintf((char *)str, (const char *)format, a, b, c, d);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_5_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e) {
+    return sprintf((char *)str, (const char *)format, a, b, c, d, e);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_6_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f) {
+    return sprintf((char *)str, (const char *)format, a, b, c, d, e, f);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_7_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g) {
+    return sprintf((char *)str, (const char *)format, a, b, c, d, e, f, g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t sprintf_8_ffi(moonbit_bytes_t str, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h) {
+    return sprintf((char *)str, (const char *)format, a, b, c, d, e, f, g, h);
+}
+
+///////////////////////
+// snprintf family - variadic enumeration
+// int snprintf(char *str, size_t size, const char *format, ...);
+MOONBIT_FFI_EXPORT
+int32_t snprintf_0_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format) {
+    return snprintf((char *)str, (size_t)size, "%s", (const char *)format);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_1_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_2_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_3_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_4_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c, void *d) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c, d);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_5_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c, d, e);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_6_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c, d, e, f);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_7_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c, d, e, f, g);
+}
+
+MOONBIT_FFI_EXPORT
+int32_t snprintf_8_ffi(moonbit_bytes_t str, uint64_t size, moonbit_bytes_t format, void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h) {
+    return snprintf((char *)str, (size_t)size, (const char *)format, a, b, c, d, e, f, g, h);
+}

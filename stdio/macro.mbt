@@ -1,11 +1,3 @@
-///| 文件流指针
-#external
-pub type FILE
-
-///| 文件位置指针
-#external
-pub type FPOS
-
 ///| `Bool` 是否是空指针
 pub extern "C" fn isNULL(ptr : FILE) -> Bool = "moonbit_is_null"
 
@@ -63,3 +55,12 @@ pub extern "C" fn tmpnam_max() -> Int = "tmpnam_max_ffi"
 
 ///| `tmpnam` 函数可生成的独特文件名的最大数量。
 pub extern "C" fn tmp_max() -> Int = "tmp_max_ffi"
+
+///| 分配指定大小的 Bytes 缓冲区，初始化为 0
+///
+/// 示例 :
+/// ```
+/// let buf = make_buf(256)
+/// scanf_1(b"%d\x00", buf)
+/// ```
+pub extern "C" fn make_buf(size : Int) -> Bytes = "make_buf_ffi"
